@@ -2,6 +2,7 @@ import flask
 
 import models
 import forms
+from sqlalchemy.sql import func
 
 
 app = flask.Flask(__name__)
@@ -77,7 +78,40 @@ def tags_view(tag_name):
     )
 
 @app.route("/notes/<title_name>", methods=["GET", "POST"])
+def notes_edit(title_name):
+    db = models.db
+    form = forms.NoteForm()
+    note = db.session.execute(db.select(models.Note).where(models.Note.title == title_name)).scalars().first()
 
+    if note:
+        if form.validate_on_submit():
+            note.title = form.title.data
+            note.description = form.description.data
+            note.updated_date = func.now()
+            note.tags.clear()
+            for tag_name in form.tags.data:
+                tag = (
+                    db.session.execute(db.select(models.Tag).where(models.Tag.name == tag_name))
+                    .scalars()
+                    .first()
+                )
+                if not tag:
+                    tag = models.Tag(name=tag_name)
+                    db.session.add(tag)
+                note.tags.append(tag)
+            db.session.commit()
+            return flask.redirect(flask.url_for("index"))
+        
+        form.title.data = note.title
+        form.description.data = note.description
+        form.tags.data = [tag.name for tag in note.tags]
+
+    return flask.render_template(
+        "notes-edit.html",
+        note=note,
+        form=form,
+        title_name=title_name,
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
