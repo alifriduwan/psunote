@@ -1,6 +1,5 @@
-{% extends 'base.html' %}
-{% block body %}
-<ul class="nav justify-content-center" style="padding-top: 1em;">
+{% extends 'base.html' %} {% block body %}
+<ul class="nav justify-content-center" style="padding-top: 1em">
   <li class="nav-item">
     <a class="btn btn-primary" href="{{ url_for('notes_create') }}">Create</a>
   </li>
@@ -9,19 +8,16 @@
 <div class="card my-3">
   <div class="card-body">
     <h4 class="card-title">{{ note.title }}</h4>
-    <div class="card-text my-3">
-      {{ note.description }}
-    </div>
+    <div class="card-text my-3">{{ note.description }}</div>
+    <a href="" class="btn btn-warning">Edit</a>
+    <div style="height: 25px"></div>
     <div class="card-footer text-muted">
-      Tags: 
-      {% for t in note.tags %}
-        <a href="{{ url_for('tags_view', tag_name=t.name) }}">{{ t.name }}</a>
-    {% endfor %}
-      <br>
+      Tags: {% for t in note.tags %}
+      <a href="{{ url_for('tags_view', tag_name=t.name) }}">{{ t.name }}</a>
+      {% endfor %}
+      <br />
       Last update: {{ note.updated_date }}
     </div>
   </div>
 </div>
-{% endfor %}
-{% endblock %}
-
+{% endfor %} {% endblock %}
