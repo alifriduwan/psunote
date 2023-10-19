@@ -76,6 +76,8 @@ def tags_view(tag_name):
         notes=notes,
     )
 
+@app.route("/notes/<title_name>", methods=["GET", "POST"])
+
 
 if __name__ == "__main__":
     app.run(debug=True)
