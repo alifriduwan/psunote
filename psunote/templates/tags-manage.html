@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block body %}
+<ul class="nav justify-content-center" style="padding-top: 1em">
+  <li class="nav-item">
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Home</a>
+  </li>
+</ul>
+<h3 class="my-2 text-center display-6">All Tags</h3>
+<div class="container">
+  <div class="row">
+    {% for tag in tags %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ tag.name }}</h5>
+          <a href="" class="btn btn-warning"><i></i> Edit</a>
+          <a href="" class="btn btn-danger"><i></i> Delete</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

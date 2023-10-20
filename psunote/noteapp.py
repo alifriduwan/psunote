@@ -122,6 +122,10 @@ def notes_delete(title_name):
     
     return flask.redirect(flask.url_for("index"))
 
+@app.route("/tags/management")
+
+
+
 
 
 if __name__ == "__main__":
