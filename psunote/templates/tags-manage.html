@@ -17,7 +17,15 @@
             class="btn btn-warning"
             ><i></i> Edit</a
           >
-          <a href="" class="btn btn-danger"><i></i> Delete</a>
+          {% if tag.id in tag_In_Use %}
+          <button class="btn btn-danger btn-sm" disabled>Delete</button>
+          {% else %}
+          <a
+            href="{{ url_for('tags_delete', tag_name=tag.name) }}"
+            class="btn btn-danger btn-sm"
+            >Delete</a
+          >
+          {% endif %}
         </div>
       </div>
     </div>
