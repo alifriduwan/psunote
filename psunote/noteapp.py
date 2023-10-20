@@ -113,5 +113,9 @@ def notes_edit(title_name):
         title_name=title_name,
     )
 
+@app.route("/notes/<title_name>/delete", methods=["GET","POST"])
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
