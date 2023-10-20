@@ -135,6 +135,7 @@ def tags_manage():
     )
 
 
+@app.route("/tags/<tag_name>/edit", methods=["GET","POST"])
 
 
 if __name__ == "__main__":
