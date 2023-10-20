@@ -123,7 +123,16 @@ def notes_delete(title_name):
     return flask.redirect(flask.url_for("index"))
 
 @app.route("/tags/management")
+def tags_manage():
+    db = models.db
+    tags = db.session.execute(
+        db.select(models.Tag)
+    ).scalars()
 
+    return flask.render_template(
+        "tags-manage.html",
+        tags=tags,
+    )
 
 
 
