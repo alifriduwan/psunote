@@ -17,6 +17,7 @@
     <a
       href="{{ url_for('notes_delete', title_name=note.title) }}"
       class="btn btn-danger"
+      onclick="return confirm('คุณต้องการ \'{{ note.title }}\' หรือไม่')"
       >Delete</a
     >
     <div style="height: 25px"></div>
